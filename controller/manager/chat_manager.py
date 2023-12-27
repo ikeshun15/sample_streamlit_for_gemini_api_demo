@@ -3,6 +3,8 @@ from ..handler import GeminiHandler, PillowHandler
 import google.generativeai as genai
 from typing import Optional
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class ChatManager:
     @staticmethod

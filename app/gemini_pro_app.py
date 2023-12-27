@@ -5,11 +5,11 @@ from controller import ChatManager
 class GeminiProAppComponents:
     @staticmethod
     def init_page():
-        ChatManager.set_default_api_key()
         st.set_page_config(
             page_title="Gemini Pro", 
             page_icon="💬",
         )
+        ChatManager.set_default_api_key()
     
     @staticmethod
     def display_main_page():
