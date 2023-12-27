@@ -17,7 +17,7 @@ class GeminiProVisionAppComponents:
         st.markdown("# 🖼️ Gemini Pro Vision")
         with st.form(key="gemini_pro_vision_form"):
             uploaded_files = st.file_uploader("JPGファイル", accept_multiple_files=False)
-            prompt = st.text_input(label="プロンプト")
+            prompt = st.text_area(label="プロンプト")
             submit_button = st.form_submit_button(label="Submit", type="primary")
 
         if submit_button:

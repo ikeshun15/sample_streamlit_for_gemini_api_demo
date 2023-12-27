@@ -16,7 +16,7 @@ class GeminiProAppComponents:
         
         st.markdown("# 💬 Gemini Pro")
         with st.form(key="gemini_pro_form"):
-            prompt = st.text_input(label="プロンプト")
+            prompt = st.text_area(label="プロンプト")
             submit_button = st.form_submit_button(label="Submit", type="primary")
 
         if submit_button:
