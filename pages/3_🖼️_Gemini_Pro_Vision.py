@@ -1,0 +1,3 @@
+from app import GeminiProVisionAppComponents
+
+GeminiProVisionAppComponents.set_page()
