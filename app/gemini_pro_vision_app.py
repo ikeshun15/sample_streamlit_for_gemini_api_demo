@@ -1,6 +1,6 @@
 import streamlit as st
 
-from controller import ChatManager
+from controller import ChatManager, ImageManager
 
 class GeminiProVisionAppComponents:
     @staticmethod
@@ -21,6 +21,7 @@ class GeminiProVisionAppComponents:
             submit_button = st.form_submit_button(label="Submit", type="primary")
 
         if submit_button:
+            st.image(ImageManager.display_input_image(uploaded_files))
             message = st.chat_message("assistant")
             for chunk in ChatManager.gemini_pro_vision_generate_content(image_path=uploaded_files, query=prompt, stream=True):
                 message.markdown(chunk)
