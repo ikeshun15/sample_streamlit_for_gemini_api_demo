@@ -2,14 +2,14 @@ import streamlit as st
 
 class HomeAppComponents:
     @staticmethod
-    def init_page():
+    def init_page() -> None:
         st.set_page_config(
             page_title="Home",
             page_icon="🏠",
         )
     
     @staticmethod
-    def display_main_page():
+    def display_main_page() -> None:
         st.write("# Gemini API Demoへようこそ 😊")
 
         st.markdown(
@@ -23,6 +23,6 @@ class HomeAppComponents:
         )
 
     @classmethod
-    def set_page(cls):
+    def set_page(cls) -> None:
         cls.init_page()
         cls.display_main_page()

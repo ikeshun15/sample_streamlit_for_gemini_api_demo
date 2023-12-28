@@ -4,7 +4,7 @@ from controller import ChatManager
 
 class GeminiProAppComponents:
     @staticmethod
-    def init_page():
+    def init_page() -> None:
         st.set_page_config(
             page_title="Gemini Pro", 
             page_icon="💬",
@@ -12,7 +12,7 @@ class GeminiProAppComponents:
         ChatManager.set_default_api_key()
     
     @staticmethod
-    def display_main_page():
+    def display_main_page() -> None:
         
         st.markdown("# 💬 Gemini Pro")
         with st.form(key="gemini_pro_form"):
@@ -26,6 +26,6 @@ class GeminiProAppComponents:
                 message.markdown(chunk)
 
     @classmethod
-    def set_page(cls):
+    def set_page(cls) -> None:
         cls.init_page()
         cls.display_main_page()
