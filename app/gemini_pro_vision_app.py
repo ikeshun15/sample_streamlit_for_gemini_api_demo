@@ -22,7 +22,9 @@ class GeminiProVisionAppComponents:
 
         if submit_button:
             message = st.chat_message("assistant")
-            message.markdown(ChatManager.gemini_pro_vision_generate_content(image_path=uploaded_files, query=prompt, stream=False))
+            # message.markdown(ChatManager.gemini_pro_vision_generate_content(image_path=uploaded_files, query=prompt, stream=False))
+            for chunk in ChatManager.gemini_pro_vision_generate_content(image_path=uploaded_files, query=prompt, stream=True):
+                message.markdown(chunk)
 
     @classmethod
     def set_page(cls):

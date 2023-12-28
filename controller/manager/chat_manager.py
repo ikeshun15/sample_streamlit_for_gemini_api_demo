@@ -21,11 +21,21 @@ class ChatManager:
 
     @classmethod
     def gemini_pro_generate_content(cls, query: str, stream: Optional[bool] = True) -> str:
-        return cls.set_model(model_name='gemini-pro').generate_content(contents=query, stream=stream).text
+        if query == "":
+            return
+        response = cls.set_model(model_name='gemini-pro').generate_content(contents=query, stream=stream)
+        if stream:
+            for chunk in response:
+                yield chunk.text
+        return response.text
     
     @classmethod
     def gemini_pro_vision_generate_content(cls, image_path: str, query: Optional[str] = None, stream: Optional[bool] = True) -> str:
+        if image_path == None:
+            return
         img = PillowHandler.open_image(image_path=image_path)
-        if query != None:
-            return cls.set_model(model_name='gemini-pro-vision').generate_content(contents=[query, img], stream=stream).text
-        return cls.set_model(model_name='gemini-pro-vision').generate_content(contents=img, stream=stream).text
+        response = cls.set_model(model_name='gemini-pro-vision').generate_content(contents=[query, img], stream=stream)
+        if stream:
+            for chunk in response:
+                yield chunk.text
+        return response.text
