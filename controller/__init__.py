@@ -1,1 +1,1 @@
-from .manager import ChatManager, ImageManager
+from .manager import ChatManager, ImageManager, LottieManager
