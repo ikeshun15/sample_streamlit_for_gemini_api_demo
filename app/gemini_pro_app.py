@@ -20,10 +20,16 @@ class GeminiProAppComponents:
             submit_button = st.form_submit_button(label="Submit", type="primary")
 
         if submit_button:
-            message = st.chat_message("assistant")
+            # message = st.chat_message("assistant")
+            # # message.markdown(ChatManager.gemini_pro_generate_content(query=prompt, stream=False))
+            # response = ChatManager.gemini_pro_generate_content(query=prompt, stream=True, callback_func=message.markdown)
+            # message.markdown(response)
+
+            with st.chat_message("assistant"):
+                message = st.empty()
             # message.markdown(ChatManager.gemini_pro_generate_content(query=prompt, stream=False))
-            for chunk in ChatManager.gemini_pro_generate_content(query=prompt, stream=True):
-                message.markdown(chunk)
+            response = ChatManager.gemini_pro_generate_content(query=prompt, stream=True, callback_func=message.markdown)
+            message.markdown(response)
 
     @classmethod
     def set_page(cls) -> None:
