@@ -1,6 +1,8 @@
 import streamlit as st
+from streamlit_lottie import st_lottie_spinner
 
 from controller import ChatManager
+from model import LottieManager
 
 class GeminiProAppComponents:
     @staticmethod
@@ -13,23 +15,18 @@ class GeminiProAppComponents:
     
     @staticmethod
     def display_main_page() -> None:
-        
         st.markdown("# 💬 Gemini Pro")
         with st.form(key="gemini_pro_form"):
             prompt = st.text_area(label="プロンプト")
             submit_button = st.form_submit_button(label="Submit", type="primary")
 
         if submit_button:
-            # message = st.chat_message("assistant")
-            # # message.markdown(ChatManager.gemini_pro_generate_content(query=prompt, stream=False))
-            # response = ChatManager.gemini_pro_generate_content(query=prompt, stream=True, callback_func=message.markdown)
-            # message.markdown(response)
-
             with st.chat_message("assistant"):
                 message = st.empty()
-            # message.markdown(ChatManager.gemini_pro_generate_content(query=prompt, stream=False))
-            response = ChatManager.gemini_pro_generate_content(query=prompt, stream=True, callback_func=message.markdown)
-            message.markdown(response)
+
+            with st_lottie_spinner(animation_source=LottieManager.PROCESSING_LOTTIE, key="PROCESSING_LOTTIE", width=50):
+                response = ChatManager.gemini_pro_generate_content(query=prompt, stream=True, callback_func=message.markdown)
+                message.markdown(response)
 
     @classmethod
     def set_page(cls) -> None:

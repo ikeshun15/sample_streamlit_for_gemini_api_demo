@@ -1,4 +1,5 @@
-from ..handler import GeminiHandler, PillowHandler
+from ..handler import GeminiHandler
+from model import PillowHandler
 
 import google.generativeai as genai
 from typing import Callable, Optional

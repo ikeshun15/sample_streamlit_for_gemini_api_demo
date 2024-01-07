@@ -1,6 +1,8 @@
 import streamlit as st
+from streamlit_lottie import st_lottie_spinner
 
-from controller import ChatManager, ImageManager
+from controller import ChatManager
+from model import ImageManager, LottieManager
 
 class GeminiProVisionAppComponents:
     @staticmethod
@@ -24,8 +26,10 @@ class GeminiProVisionAppComponents:
             st.image(ImageManager.display_input_image(uploaded_files))
             with st.chat_message("assistant"):
                 message = st.empty()
-            response = ChatManager.gemini_pro_vision_generate_content(image_path=uploaded_files, query=prompt, stream=True, callback_func=message.markdown)
-            message.markdown(response)
+            
+            with st_lottie_spinner(animation_source=LottieManager.PROCESSING_LOTTIE, key="PROCESSING_LOTTIE", width=50):
+                response = ChatManager.gemini_pro_vision_generate_content(image_path=uploaded_files, query=prompt, stream=True, callback_func=message.markdown)
+                message.markdown(response)
 
 
     @classmethod

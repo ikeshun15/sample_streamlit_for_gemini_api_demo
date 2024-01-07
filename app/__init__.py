@@ -1,3 +1,1 @@
-from .home_app import HomeAppComponents
-from .gemini_pro_app import GeminiProAppComponents
-from .gemini_pro_vision_app import GeminiProVisionAppComponents
+from .components import HomeAppComponents, GeminiProAppComponents, GeminiProVisionAppComponents
