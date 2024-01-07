@@ -18,7 +18,7 @@ class HomeAppComponents:
             st.session_state["wakeup_lottie"] = True
 
         if st.session_state["wakeup_lottie"]:
-            st_lottie(animation_source=LottieManager.WAKEUP_LOGO, key="STREAMLIT_LOGO_LOTTIE", speed=1.4, reverse=False, loop=False)
+            st_lottie(animation_source=LottieManager.WAKEUP_LOGO, key="STREAMLIT_LOGO_LOTTIE", speed=1.7, reverse=False, loop=False)
             sleep(1.5)
             st.session_state["wakeup_lottie"] = False
             st.rerun()

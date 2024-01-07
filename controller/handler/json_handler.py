@@ -1,6 +1,5 @@
 import json
 
-
 class JsonHandler:
     @staticmethod
     def load(filepath) -> str:
