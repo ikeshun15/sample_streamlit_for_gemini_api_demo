@@ -1,8 +1,3 @@
-# minicondaで仮想環境を作る
-```
-conda create --name python310_streamlit_gemini_demo python=3.10
-```
-
 # 環境
 * python: 3.10
 
