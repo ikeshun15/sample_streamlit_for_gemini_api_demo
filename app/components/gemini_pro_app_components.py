@@ -12,21 +12,25 @@ class GeminiProAppComponents:
             page_icon="💬",
         )
         ChatManager.set_default_api_key()
-    
+
     @staticmethod
     def display_main_page() -> None:
         st.markdown("# 💬 Gemini Pro")
-        with st.form(key="gemini_pro_form"):
+        with st.form(key="gemini_pro_form", clear_on_submit=True):
             prompt = st.text_area(label="プロンプト")
             submit_button = st.form_submit_button(label="Submit", type="primary")
 
         if submit_button:
+            user_message = st.chat_message("user")
+            user_message.markdown(prompt)
+            
             with st.chat_message("assistant"):
-                message = st.empty()
+                gemini_message = st.empty()
 
             with st_lottie_spinner(animation_source=LottieManager.PROCESSING_LOTTIE, key="PROCESSING_LOTTIE", width=50):
-                response = ChatManager.gemini_pro_generate_content(query=prompt, stream=True, callback_func=message.markdown)
-                message.markdown(response)
+                response = ChatManager.gemini_pro_generate_content(query=prompt, stream=True, callback_func=gemini_message.markdown)
+                gemini_message.markdown(response)
+
 
     @classmethod
     def set_page(cls) -> None:

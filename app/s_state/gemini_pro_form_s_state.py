@@ -1,10 +1,10 @@
 from .base_s_state import BaseSState
 
-
-class WakeupLottieSState(BaseSState[bool]):
+    
+class GeminiProFormSState(BaseSState[bool]):
     @staticmethod
     def get_name() -> str:
-        return "wakeup_lottie"
+        return "gemini_pro_form_state"
     
     @staticmethod
     def get_default() -> bool:

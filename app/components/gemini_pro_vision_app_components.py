@@ -17,13 +17,16 @@ class GeminiProVisionAppComponents:
     def display_main_page() -> None:
         
         st.markdown("# 🖼️ Gemini Pro Vision")
-        with st.form(key="gemini_pro_vision_form"):
+        with st.form(key="gemini_pro_vision_form", clear_on_submit=True):
             uploaded_files = st.file_uploader(label="JPGファイル", accept_multiple_files=False)
             prompt = st.text_area(label="プロンプト")
             submit_button = st.form_submit_button(label="Submit", type="primary")
 
         if submit_button:
-            st.image(ImageManager.display_input_image(uploaded_files))
+            user_message = st.chat_message("user")
+            user_message.markdown(prompt)
+            user_message.image(ImageManager.display_input_image(uploaded_files))
+
             with st.chat_message("assistant"):
                 message = st.empty()
             
