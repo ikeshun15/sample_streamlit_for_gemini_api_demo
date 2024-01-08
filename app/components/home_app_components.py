@@ -27,7 +27,7 @@ class HomeAppComponents:
     
     @staticmethod
     def display_main_page() -> None:
-        st.write("# Gemini API Demoへようこそ 😊")
+        st.header(body="Gemini API Demoへようこそ 😊", divider='rainbow')
 
         st.markdown(
             """

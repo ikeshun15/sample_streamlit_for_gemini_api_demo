@@ -15,9 +15,9 @@ class GeminiProAppComponents:
 
     @staticmethod
     def display_main_page() -> None:
-        st.markdown("# 💬 Gemini Pro")
+        st.header(body="💬 Gemini Pro", divider='rainbow')
         with st.form(key="gemini_pro_form", clear_on_submit=True):
-            prompt = st.text_area(label="プロンプト")
+            prompt = st.text_area(label="プロンプト", placeholder="Gemini Proに聞いてください...")
             submit_button = st.form_submit_button(label="Submit", type="primary")
 
         if submit_button:

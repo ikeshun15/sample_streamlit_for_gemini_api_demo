@@ -15,11 +15,10 @@ class GeminiProVisionAppComponents:
     
     @staticmethod
     def display_main_page() -> None:
-        
-        st.markdown("# 🖼️ Gemini Pro Vision")
+        st.header(body="🖼️ Gemini Pro Vision", divider='rainbow')
         with st.form(key="gemini_pro_vision_form", clear_on_submit=True):
-            uploaded_files = st.file_uploader(label="JPGファイル", accept_multiple_files=False)
-            prompt = st.text_area(label="プロンプト")
+            uploaded_files = st.file_uploader(label="画像をアップロード", type=["jpg", "jpeg", "png"], accept_multiple_files=False)
+            prompt = st.text_area(label="プロンプト", placeholder="Gemini Proに聞いてください...")
             submit_button = st.form_submit_button(label="Submit", type="primary")
 
         if submit_button:
