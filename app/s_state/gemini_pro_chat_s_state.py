@@ -11,4 +11,4 @@ class GeminiProChatSState(BaseSState[GeminiProChatEntity]):
     
     @staticmethod
     def get_default() -> None:
-        return GeminiProChatEntity(user_message=st.empty(), gemini_message=st.empty(), prompt=None, response=None)
+        return GeminiProChatEntity(user_message=st.empty(), gemini_message=st.empty(), prompt="", response="")
