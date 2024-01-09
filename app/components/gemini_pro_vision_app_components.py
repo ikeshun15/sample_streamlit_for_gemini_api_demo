@@ -14,7 +14,7 @@ class GeminiProVisionAppComponents:
         ChatManager.set_default_api_key()
     
     @staticmethod
-    def display_main_page() -> None:
+    def main_page() -> None:
         st.header(body="🖼️ Gemini Pro Vision", divider='rainbow')
         with st.form(key="gemini_pro_vision_form", clear_on_submit=True):
             uploaded_files = st.file_uploader(label="画像をアップロード", type=["jpg", "jpeg", "png"], accept_multiple_files=False)
@@ -37,4 +37,4 @@ class GeminiProVisionAppComponents:
     @classmethod
     def set_page(cls) -> None:
         cls.init_page()
-        cls.display_main_page()
+        cls.main_page()

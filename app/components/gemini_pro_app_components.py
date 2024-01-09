@@ -14,7 +14,7 @@ class GeminiProAppComponents:
         ChatManager.set_default_api_key()
 
     @staticmethod
-    def display_main_page() -> None:
+    def main_page() -> None:
         st.header(body="💬 Gemini Pro", divider='rainbow')
         with st.form(key="gemini_pro_form", clear_on_submit=True):
             prompt = st.text_area(label="プロンプト", placeholder="Gemini Proに聞いてください...")
@@ -35,4 +35,4 @@ class GeminiProAppComponents:
     @classmethod
     def set_page(cls) -> None:
         cls.init_page()
-        cls.display_main_page()
+        cls.main_page()
