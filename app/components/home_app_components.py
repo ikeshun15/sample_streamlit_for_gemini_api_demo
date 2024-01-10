@@ -31,7 +31,7 @@ class HomeAppComponents:
 
         st.markdown(
             """
-            ### このデモアプリで使えるモデル
+            #### このデモアプリで使えるモデル
             - Gemini Pro
             - Gemini Pro Vision
             

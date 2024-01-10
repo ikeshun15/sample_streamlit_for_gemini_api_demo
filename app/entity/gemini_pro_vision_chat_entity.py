@@ -1,10 +1,15 @@
 from typing import Any, List
 
-class GeminiProChatEntity:
-    def __init__(self, prompt: str, response: str) -> None:
+class GeminiProVisionChatEntity:
+    def __init__(self, image_path: str, prompt: str, response: str) -> None:
+        self._image_path = image_path
         self._prompt = prompt
         self._response = response
     
+    @property
+    def image_path(self) -> str:
+        return self._image_path
+
     @property
     def prompt(self) -> str:
         return self._prompt

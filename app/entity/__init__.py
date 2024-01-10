@@ -1,1 +1,2 @@
 from .gemini_pro_chat_entity import GeminiProChatEntity
+from .gemini_pro_vision_chat_entity import GeminiProVisionChatEntity
