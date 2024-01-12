@@ -11,10 +11,12 @@ class GeminiHandler:
     def set_model(model_name: str) -> genai.GenerativeModel:
         return genai.GenerativeModel(model_name=model_name)
 
-    @staticmethod
-    def get_response(model: genai.GenerativeModel, query: str, stream: bool) -> str:
+    @classmethod
+    def get_response(cls, model_name: str, query: str, stream: bool) -> str:
+        model = cls.set_model(model_name=model_name)
         return model.generate_content(contents=query, stream=stream)
         
-    @staticmethod
-    def get_response_with_image(model: genai.GenerativeModel, query: Optional[str], image: Image.Image, stream: bool) -> str:
+    @classmethod
+    def get_response_with_image(cls, model_name: str, query: Optional[str], image: Image.Image, stream: bool) -> str:
+        model = cls.set_model(model_name=model_name)
         return model.generate_content(contents=[query, image], stream=stream)
