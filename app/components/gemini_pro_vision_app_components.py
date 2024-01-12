@@ -41,7 +41,7 @@ class GeminiProVisionAppComponents:
                 message = st.empty()
             
             with st_lottie_spinner(animation_source=LottieManager.PROCESSING_LOTTIE, key="PROCESSING_LOTTIE", width=50):
-                response = ChatManager.gemini_pro_vision_generate_content(image_path=uploaded_files, query=prompt, stream=True, callback_func=message.markdown)
+                response = ChatManager.gemini_pro_vision_generate_content(image_path=uploaded_files, prompt=prompt, stream=True, callback_func=message.markdown)
                 GeminiProVisionChatSState.set(value=GeminiProVisionChatEntity(image_path=uploaded_files, prompt=prompt, response=response))
                 GeminiProVisionFormSState.set(value=False)
                 st.rerun()
