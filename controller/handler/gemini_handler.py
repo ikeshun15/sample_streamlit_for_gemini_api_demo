@@ -22,7 +22,7 @@ class GeminiHandler:
         return model.generate_content(contents=[prompt, image], stream=stream)
     
     @classmethod
-    def get_chat_response_and_history(cls, model_name: str, prompt: str, stream: str, history: Optional[List] = []) -> str:
+    def get_chat_response_and_history(cls, model_name: str, prompt: str, stream: str, history: Optional[List] = []) -> tuple[str, List]:
         model = cls.set_model(model_name=model_name)
         chat = model.start_chat(history=history)
         return chat.send_message(content=prompt, stream=stream), chat.history
