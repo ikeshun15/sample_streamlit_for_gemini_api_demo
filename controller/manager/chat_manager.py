@@ -35,7 +35,8 @@ class ChatManager:
         if prompt == "":
             return
         
-        chat = GeminiHandler.set_chat(model_name="gemini-pro", history=history)
+        model = GeminiHandler.set_model(model_name="gemini-pro")
+        chat = GeminiHandler.set_chat(model=model, history=history)
         chat_response = GeminiHandler.get_chat_response(chat=chat, prompt=prompt, stream=stream)
         if stream:
             answer = ""

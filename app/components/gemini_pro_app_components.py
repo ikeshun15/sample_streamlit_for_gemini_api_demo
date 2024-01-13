@@ -74,15 +74,15 @@ class GeminiProAppComponents:
                 st.rerun()
         
         gemini_chat_conv_list = GeminiProChatConvSState.get()
-        print(gemini_chat_conv_list)
+
         if gemini_chat_conv_list:
             user_message = st.chat_message("user")
             gemini_message = st.chat_message("assistant")
-            for message in gemini_chat_conv_list:
+            for i, message in enumerate(gemini_chat_conv_list):
                 if message.role == "user":
-                    user_message.markdown(message.parts[0].text)
+                    user_message.markdown(message.parts[0].text[i])
                 else:
-                    gemini_message.markdown(message.parts[0].text)
+                    gemini_message.markdown(message.parts[0].text[i+1])
 
     @classmethod
     def select_page(cls):
