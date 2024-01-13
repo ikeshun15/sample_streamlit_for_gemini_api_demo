@@ -15,7 +15,10 @@
     ```
 
 3. .envファイルを作る
-    .env_sampleファイルをもとに.envファイルを作成して、Gemini用APIキーを入力する  
+    .env_sampleファイルをもとに.envファイルを作成して、Gemini用APIキーを入力する
+    ```
+    GEMINI_API_KEY = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    ```
 
 
 # 実行
