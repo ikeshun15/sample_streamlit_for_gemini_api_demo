@@ -21,7 +21,8 @@ class ChatManager:
         if prompt == "":
             return
 
-        response = GeminiHandler.get_response(model_name="gemini-pro", prompt=prompt, stream=stream)
+        model = GeminiHandler.set_model(model_name="gemini-pro")
+        response = GeminiHandler.get_response(model=model, prompt=prompt, stream=stream)
         if stream:
             answer = ""
             for chunk in response:
@@ -34,13 +35,16 @@ class ChatManager:
         if prompt == "":
             return
         
-        chat_response, chat_history = GeminiHandler.get_chat_response_and_history(model_name="gemini-pro", prompt=prompt, stream=stream, history=history)
+        chat = GeminiHandler.set_chat(model_name="gemini-pro", history=history)
+        chat_response = GeminiHandler.get_chat_response(chat=chat, prompt=prompt, stream=stream)
         if stream:
             answer = ""
             for chunk in chat_response:
                 answer += chunk.text
                 callback_func(answer)
-        return chat_response.text, chat_history
+
+        chat_history = GeminiHandler.get_chat_history(chat=chat)
+        return chat_history
     
     @staticmethod
     def gemini_pro_vision_generate_content(image_path: str, prompt: Optional[str] = None, stream: Optional[bool] = True, callback_func: Callable[[str], None] = print) -> str:
@@ -48,7 +52,8 @@ class ChatManager:
             return
         img = PillowHandler.open_image(image_path=image_path)
 
-        response = GeminiHandler.get_response_with_image(model_name="gemini-pro-vision", prompt=prompt, image=img, stream=stream)
+        model = GeminiHandler.set_model(model_name="gemini-pro")
+        response = GeminiHandler.get_response_with_image(model=model, prompt=prompt, image=img, stream=stream)
         if stream:
             answer = ""
             for chunk in response:
