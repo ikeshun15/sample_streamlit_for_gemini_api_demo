@@ -27,7 +27,6 @@ class GeminiProAppComponents:
 
     @classmethod
     def generate_content_page(cls) -> None:
-        # prompt = st.chat_input(placeholder="Gemini Proに聞いてください...", on_submit=cls.on_click, disabled=GeminiProFormSState.get())
         with st.form(key="gemini_pro_form", clear_on_submit=True):
             prompt = st.text_area(label="プロンプト", placeholder="Gemini Proに聞いてください...", disabled=GeminiProFormSState.get())
             submit_button = st.form_submit_button(label="Submit", type="primary", on_click=cls.on_click, disabled=GeminiProFormSState.get())
@@ -43,7 +42,6 @@ class GeminiProAppComponents:
             gemini_message.markdown(gemini_chat_instance.response)
         
         if submit_button:
-        # if prompt:
             user_message = st.chat_message("user")
             user_message.markdown(prompt)
             
@@ -57,24 +55,20 @@ class GeminiProAppComponents:
                 st.rerun()
 
     @classmethod
-    def multi_conv_page(cls):
+    def multi_conv_page(cls) -> None:
         prompt = st.chat_input(placeholder="Gemini Proに聞いてください...", on_submit=cls.on_click, disabled=GeminiProFormSState.get())
-        # with st.form(key="gemini_pro_form", clear_on_submit=True):
-        #     prompt = st.text_area(label="プロンプト", placeholder="Gemini Proに聞いてください...", disabled=GeminiProFormSState.get())
-        #     submit_button = st.form_submit_button(label="Submit", type="primary", on_click=cls.on_click, disabled=GeminiProFormSState.get())
 
         gemini_chat_conv_list = GeminiProChatConvSState.get()
 
         if gemini_chat_conv_list:
-            user_message = st.chat_message("user")
-            gemini_message = st.chat_message("assistant")
-            for i, message in enumerate(gemini_chat_conv_list):
+            for message in gemini_chat_conv_list:
                 if message.role == "user":
-                    user_message.markdown(message.parts[0].text)
+                    with st.chat_message("user"):
+                        st.markdown(message.parts[0].text)
                 else:
-                    gemini_message.markdown(message.parts[0].text)
+                    with st.chat_message("assistant"):
+                        st.markdown(message.parts[0].text)
 
-        # if submit_button:
         if prompt:
             user_message = st.chat_message("user")
             user_message.markdown(prompt)
@@ -89,7 +83,7 @@ class GeminiProAppComponents:
                 st.rerun()
 
     @classmethod
-    def select_page(cls):
+    def select_page(cls) -> None:
         st.header(body="💬 Gemini Pro", divider='rainbow')
         mode_select =  st.radio(label="モードセレクト", options=["**会話(複数やり取り)**", "**生成**"], horizontal=True)
         if mode_select == "**会話(複数やり取り)**":
@@ -102,5 +96,4 @@ class GeminiProAppComponents:
     def set_page(cls) -> None:
         cls.init_page()
         cls.init_session_state()
-        # cls.generate_content_page()
         cls.select_page()
