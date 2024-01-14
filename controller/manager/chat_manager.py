@@ -31,7 +31,7 @@ class ChatManager:
         return response.text
     
     @staticmethod
-    def gemini_pro_chat_content(prompt: str, stream: Optional[bool] = True, history: Optional[List] = [], callback_func: Callable[[str], None] = print) -> tuple[str, List]:
+    def gemini_pro_chat_content(prompt: str, stream: Optional[bool] = True, history: Optional[List] = [], callback_func: Callable[[str], None] = print) -> List:
         if prompt == "":
             return
         

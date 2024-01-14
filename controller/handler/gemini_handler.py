@@ -1,4 +1,5 @@
 import google.generativeai as genai
+from google.generativeai.types import generation_types
 from PIL import Image
 from typing import Optional, List
 
@@ -12,11 +13,11 @@ class GeminiHandler:
         return genai.GenerativeModel(model_name=model_name)
 
     @staticmethod
-    def get_response(model: genai.GenerativeModel, prompt: str, stream: bool):
+    def get_response(model: genai.GenerativeModel, prompt: str, stream: bool) -> generation_types.GenerateContentResponse:
         return model.generate_content(contents=prompt, stream=stream)
         
     @staticmethod
-    def get_response_with_image(model: genai.GenerativeModel, prompt: Optional[str], image: Image.Image, stream: bool):
+    def get_response_with_image(model: genai.GenerativeModel, prompt: Optional[str], image: Image.Image, stream: bool) -> generation_types.GenerateContentResponse:
         return model.generate_content(contents=[prompt, image], stream=stream)
     
     @staticmethod
@@ -24,7 +25,7 @@ class GeminiHandler:
         return model.start_chat(history=history)
     
     @staticmethod
-    def get_chat_response(chat: genai.ChatSession, prompt: str, stream: str):
+    def get_chat_response(chat: genai.ChatSession, prompt: str, stream: str) -> generation_types.GenerateContentResponse:
         return chat.send_message(content=prompt, stream=stream)
     
     @staticmethod
