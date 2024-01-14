@@ -1,7 +1,6 @@
 from ..handler import GeminiHandler
 from model import PillowHandler
 
-import google.generativeai as genai
 from typing import Callable, Optional, List
 import os
 from dotenv import load_dotenv
