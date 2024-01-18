@@ -25,23 +25,15 @@ class GeminiProAppComponents:
     def on_click():
         GeminiProFormSState.set(value=True)
 
+    @staticmethod
+    def header():
+        st.header(body="💬 Gemini Pro Demo", divider='rainbow')
+
     @classmethod
     def generate_content_page(cls) -> None:
-        with st.form(key="gemini_pro_form", clear_on_submit=True):
-            prompt = st.text_area(label="プロンプト", placeholder="Gemini Proに聞いてください...", disabled=GeminiProFormSState.get())
-            submit_button = st.form_submit_button(label="Submit", type="primary", on_click=cls.on_click, disabled=GeminiProFormSState.get())
-
-        gemini_chat_instance = GeminiProChatSState.get()
-
-        if gemini_chat_instance.prompt != "":
-            user_message = st.chat_message("user")
-            user_message.markdown(gemini_chat_instance.prompt)
+        prompt = st.chat_input(placeholder="Gemini Proに聞いてください...", on_submit=cls.on_click, disabled=GeminiProFormSState.get())
         
-        if gemini_chat_instance.response != "":
-            gemini_message = st.chat_message("assistant")
-            gemini_message.markdown(gemini_chat_instance.response)
-        
-        if submit_button:
+        if prompt:
             user_message = st.chat_message("user")
             user_message.markdown(prompt)
             
@@ -53,6 +45,16 @@ class GeminiProAppComponents:
                 GeminiProChatSState.set(value=GeminiProChatEntity(prompt=prompt, response=response))
                 GeminiProFormSState.set(value=False)
                 st.rerun()
+        
+        gemini_chat_instance = GeminiProChatSState.get()
+
+        if gemini_chat_instance.prompt != "":
+            user_message = st.chat_message("user")
+            user_message.markdown(gemini_chat_instance.prompt)
+        
+        if gemini_chat_instance.response != "":
+            gemini_message = st.chat_message("assistant")
+            gemini_message.markdown(gemini_chat_instance.response)
 
     @classmethod
     def multi_conv_page(cls) -> None:
@@ -84,13 +86,12 @@ class GeminiProAppComponents:
 
     @classmethod
     def select_page(cls) -> None:
-        st.header(body="💬 Gemini Pro", divider='rainbow')
-        mode_select =  st.radio(label="モードセレクト", options=["**会話(複数やり取り)**", "**生成**"], horizontal=True)
-        if mode_select == "**会話(複数やり取り)**":
+        st.header(body="💬 Gemini Pro Demo", divider='rainbow')
+        mode_select = st.toggle(label="会話モード(連続やり取り)", value=True)
+        if mode_select:
             cls.multi_conv_page()
         else:
             cls.generate_content_page()
-
 
     @classmethod
     def set_page(cls) -> None:
