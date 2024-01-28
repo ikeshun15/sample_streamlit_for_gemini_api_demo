@@ -1,7 +1,5 @@
 import google.generativeai as genai
-from google.generativeai.types import generation_types
 from typing import Callable, Optional, List
-import os
 from dotenv import load_dotenv
 load_dotenv()
 

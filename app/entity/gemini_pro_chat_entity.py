@@ -1,6 +1,6 @@
 import google.generativeai as genai
-from google.generativeai.types import generation_types
-from typing import Any, List
+from google.ai import generativelanguage as glm
+from typing import List
 
 from controller import ChatManager
 
@@ -16,7 +16,7 @@ class GeminiProChatEntity:
     def chat_history(self) -> str:
         return self._chat.history
 
-    def get_chat_history_list(self):
+    def get_chat_history_list(self) -> List[glm.Content]:
         chat_history_list = []
         for message in self._chat.history:
             chat_history_list.append(message)
