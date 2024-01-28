@@ -27,7 +27,3 @@ class GeminiHandler:
     @staticmethod
     def get_chat_response(chat: genai.ChatSession, prompt: str, stream: str) -> generation_types.GenerateContentResponse:
         return chat.send_message(content=prompt, stream=stream)
-    
-    @staticmethod
-    def get_chat_history(chat: genai.ChatSession) -> List:
-        return chat.history
