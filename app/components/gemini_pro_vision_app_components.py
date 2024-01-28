@@ -13,7 +13,6 @@ class GeminiProVisionAppComponents:
             page_title="Gemini Pro Vision", 
             page_icon="🖼️",
         )
-        ChatManager.set_default_api_key()
 
     @staticmethod
     def init_session_state():

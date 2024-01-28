@@ -33,8 +33,7 @@ class ChatManager:
             return
         img = PillowHandler.open_image(image_path=image_path)
 
-        model = GeminiHandler.set_model(model_name="gemini-pro-vision")
-        response = GeminiHandler.get_response_with_image(model=model, prompt=prompt, image=img, stream=stream)
+        response = GeminiHandler.get_response_with_image(model=ModelManager.PRO_VISION_MODEL, prompt=prompt, image=img, stream=stream)
         if stream:
             answer = ""
             for chunk in response:
