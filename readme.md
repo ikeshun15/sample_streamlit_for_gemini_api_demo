@@ -6,7 +6,7 @@
 1. 仮想環境を作成する
     ```
     conda create --name python311_streamlit_gemini_demo python=3.11
-    conda activate python310_streamlit_gemini_demo
+    conda activate python311_streamlit_gemini_demo
     ```
 
 2. ライブラリをインストールする 
