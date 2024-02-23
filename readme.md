@@ -5,7 +5,7 @@
 # 設定
 1. 仮想環境を作成する
     ```
-    conda create --name python310_streamlit_gemini_demo python=3.10
+    conda create --name python311_streamlit_gemini_demo python=3.11
     conda activate python310_streamlit_gemini_demo
     ```
 
@@ -24,7 +24,7 @@
 # 実行
 1. 仮想環境を立ち上げる
     ```
-    conda activate python310_streamlit_gemini_demo
+    conda activate python311_streamlit_gemini_demo
     ```
 
 2. Streamlitを実行する
