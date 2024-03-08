@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_lottie import st_lottie_spinner
+from google.api_core.exceptions import InternalServerError
 
 from controller import ChatManager
 from model import LottieManager
@@ -51,9 +52,12 @@ class GeminiProAppComponents:
                 gemini_message = st.empty()
 
             with st_lottie_spinner(animation_source=LottieManager.PROCESSING_LOTTIE, key="PROCESSING_LOTTIE", width=50):
-                response = ChatManager.get_gemini_pro_chat_content(chat=chat_entity.chat, prompt=prompt, stream=True, history=GeminiProChatSState.get(), callback_func=gemini_message.markdown)
-                GeminiProFormSState.set(value=False)
-                st.rerun()
+                try:
+                    response = ChatManager.get_gemini_pro_chat_content(chat=chat_entity.chat, prompt=prompt, stream=True, history=GeminiProChatSState.get(), callback_func=gemini_message.markdown)
+                    GeminiProFormSState.set(value=False)
+                    st.rerun()
+                except InternalServerError as e:
+                    st.error("AIに問い合わせ中にエラーが発生しました。チャットをリセットして再度送信してください。", icon="🤷")
 
     @classmethod
     def set_page(cls) -> None:
