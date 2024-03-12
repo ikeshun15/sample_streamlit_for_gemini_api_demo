@@ -21,14 +21,18 @@ class GeminiProAppComponents:
         GeminiProChatSState.init()
 
     @staticmethod
-    def on_click():
+    def apply_button_disable():
         GeminiProFormSState.set(value=True)
+
+    @staticmethod
+    def apply_button_able():
+        GeminiProFormSState.set(value=False)
 
     @classmethod
     def main_page(cls) -> None:
         st.header(body="💬 Gemini Pro Demo", divider='rainbow')
-        prompt = st.chat_input(placeholder="Gemini Proに聞いてください...", on_submit=cls.on_click, disabled=GeminiProFormSState.get())
-        chat_reset_button = st.sidebar.button(label="チャットリセット", type="primary", use_container_width=True)
+        prompt = st.chat_input(placeholder="Gemini Proに聞いてください...", on_submit=cls.apply_button_disable, disabled=GeminiProFormSState.get())
+        chat_reset_button = st.sidebar.button(label="チャットリセット", type="primary", use_container_width=True, on_click=cls.apply_button_able)
 
         if chat_reset_button:
             GeminiProChatSState.reset()
@@ -54,7 +58,7 @@ class GeminiProAppComponents:
             with st_lottie_spinner(animation_source=LottieManager.PROCESSING_LOTTIE, key="PROCESSING_LOTTIE", width=50):
                 try:
                     response = ChatManager.get_gemini_pro_chat_content(chat=chat_entity.chat, prompt=prompt, stream=True, history=GeminiProChatSState.get(), callback_func=gemini_message.markdown)
-                    GeminiProFormSState.set(value=False)
+                    cls.apply_button_able()
                     st.rerun()
                 except InternalServerError as e:
                     st.error("AIに問い合わせ中にエラーが発生しました。チャットをリセットして再度送信してください。", icon="🤷")
