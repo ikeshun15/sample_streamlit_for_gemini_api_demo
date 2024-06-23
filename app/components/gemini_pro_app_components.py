@@ -57,7 +57,7 @@ class GeminiProAppComponents:
 
             with st_lottie_spinner(animation_source=LottieManager.PROCESSING_LOTTIE, key="PROCESSING_LOTTIE", width=50):
                 try:
-                    response = ChatManager.get_gemini_pro_chat_content(chat=chat_entity.chat, prompt=prompt, stream=True, history=GeminiProChatSState.get(), callback_func=gemini_message.markdown)
+                    gemini_message.write_stream(ChatManager.get_gemini_pro_chat_generator(chat=chat_entity.chat, prompt=prompt, stream=True))
                     cls.apply_button_able()
                     st.rerun()
                 except InternalServerError as e:

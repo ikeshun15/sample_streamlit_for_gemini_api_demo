@@ -11,10 +11,6 @@ class GeminiHandler:
     @staticmethod
     def set_model(model_name: str) -> genai.GenerativeModel:
         return genai.GenerativeModel(model_name=model_name)
-
-    @staticmethod
-    def get_response(model: genai.GenerativeModel, prompt: str, stream: bool) -> generation_types.GenerateContentResponse:
-        return model.generate_content(contents=prompt, stream=stream)
         
     @staticmethod
     def get_response_with_image(model: genai.GenerativeModel, prompt: Optional[str], image: Image.Image, stream: bool) -> generation_types.GenerateContentResponse:

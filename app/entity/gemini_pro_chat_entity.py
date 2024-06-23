@@ -11,25 +11,9 @@ class GeminiProChatEntity:
     @property
     def chat(self) -> str:
         return self._chat
-    
-    @property
-    def chat_history(self) -> str:
-        return self._chat.history
 
     def get_chat_history_list(self) -> List[glm.Content]:
         chat_history_list = []
         for message in self._chat.history:
             chat_history_list.append(message)
         return chat_history_list
-    
-    def get_role_list(self):
-        role_list = []
-        for message in self._chat.history:
-            role_list.append(message.role)
-        return role_list
-    
-    def get_message_list(self):
-        message_list = []
-        for message in self._chat.history:
-            message_list.append(message.parts[0])
-        return message_list

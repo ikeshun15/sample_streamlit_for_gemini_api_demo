@@ -11,19 +11,22 @@ class ChatManager:
     @staticmethod
     def set_gemini_pro_chat(history: Optional[List] = []):
         return GeminiHandler.set_chat(model=ModelManager.PRO_MODEL, history=history)
-    
-    @staticmethod
-    def get_gemini_pro_chat_content(chat: genai.ChatSession, prompt: str, stream: Optional[bool] = True, history: Optional[List] = [], callback_func: Callable[[str], None] = print) -> List:
+
+    def get_gemini_pro_chat_generator(chat: genai.ChatSession, prompt: str, stream: Optional[bool] = True):
         if prompt == "":
             return
-        
+
         chat_response = GeminiHandler.get_chat_response(chat=chat, prompt=prompt, stream=stream)
         if stream:
-            answer = ""
             for chunk in chat_response:
-                answer += chunk.text
-                callback_func(answer)
-        return chat_response.text
+                # レスポンスの各部分のテキストを取得
+                parts_text = [part.text for part in chunk.parts]
+
+                # テキスト部分を結合して最終的なレスポンスを作成
+                final_response = " ".join(parts_text)
+
+                yield final_response
+
     
     @staticmethod
     def gemini_pro_vision_generate_content(image_path: str, prompt: Optional[str] = None, stream: Optional[bool] = True, callback_func: Callable[[str], None] = print) -> str:
